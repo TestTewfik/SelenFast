@@ -1,0 +1,10 @@
+package stepDefinitions;
+
+public class MasterHooks {
+	
+	@Before
+	public void setup() {
+		driver = getDriver();
+	}
+
+}

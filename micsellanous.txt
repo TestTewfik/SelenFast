@@ -1,0 +1,155 @@
+DESCENDANT AXES VIEW
+
+//form[@id='rechargeForm']
+//form[@id='rechargeForm']/child::*
+//form[@id='rechargeForm']/child::input
+//form[@id='rechargeForm']/descendant::*
+//form[@id='rechargeForm']/descendant::legend
+//form[@id='rechargeForm']/descendant::legend[position()=1]
+//form[@id='rechargeForm']/descendant-or-self::*
+
+
+FOLLOWING AXES VIEW
+//div[@id='logocont']
+//div[@id='logocont']/following-sibling::*
+//div[@id='logocont']/following-sibling::div[position()=2]
+
+PROFILE
+FirefoxProfile prof = new FirefoxProfile();
+prof.setAcceptUntrustedCertificates(false);
+WebDriver driver = new FirefoxDriver(prof);
+
+
+COOKIES
+Set<Cookie> abc = driver.manage().getCookies();
+System.out.println("abc = "+abc.size());
+driver.manage().deleteAllCookies();
+Set<Cookie> abcd = driver.manage().getCookies();
+System.out.println("abcd = "+abcd.size());
+
+
+GETDATE METHODE
+String date = getDate();
+System.out.println(date);
+public static String getDate()
+	{
+		final DateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+		Date date = new Date();
+		return(sdf.format(date));
+	}
+
+DATADRIVEN PROPERTIES--------------------------------------------------------------
+Properties prop = new Properties();
+FileInputStream fis = new FileInputStream("C:\\Workspace\\....\\datadriven.properties")
+prop.load(fis);
+System.out.println(prop.getProperty("userName"));
+
+SCREENSHOTS------------------------------------------------
+String directory = "C:\\Users\\Titcho\\Desktop\\";
+//String fileName = getRandomString(10)+".png";
+String fileName = "ScreenShot"+getdate()+".png";
+File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);											 
+FileUtils.copyFile(scrFile, new File(directory + fileName));
+
+
+RANDOM METHOD-------------------------------------------------
+public static String getRandomString(int length) {
+		StringBuilder sb = new StringBuilder();
+		String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		for (int i = 0; i < length; i++) {
+			int index = (int) (Math.random() * characters.length());
+			sb.append(characters.charAt(index));
+		}
+		return sb.toString();
+	}
+	
+PROPERTIES------------------------------------------------------
+@Test
+	public void Login() throws IOException
+	{
+		
+		Properties prop = new Properties();
+		FileInputStream fis = new FileInputStream("C:\\Users\\Titcho\\eclipse-workspace\\Framework\\src\\TestNGFiles\\datadriver.properties");
+		prop.load(fis);
+		
+		
+		
+		if (prop.getProperty("browser").equals("firefox")) 
+		{
+			System.setProperty("webdriver.gecko.driver","C:\\Users\\Titcho\\Desktop\\BrowserDrivers\\geckodriver.exe");
+			driver = new FirefoxDriver();
+		}
+		else if (prop.getProperty("browser").equals("chrome"))
+		{
+			System.setProperty("webdriver.chrome.driver","C:\\Users\\Titcho\\Desktop\\BrowserDrivers\\chromedriver.exe");
+			driver = new ChromeDriver();
+		}
+		else
+		{
+			System.setProperty("webdriver.ie.driver","C:\\Users\\Titcho\\Desktop\\BrowserDrivers\\IEDriverServer.exe");
+			driver = new InternetExplorerDriver();
+		}
+		
+		driver.get(prop.getProperty("url"));
+		
+		
+	}	
+	
+TESTNG ANNOTATIONS------------------------------------------------------------------------------------------------
+Before Suite-----------------------------------
+Before Test
+Before Method
+OpenningBrowser
+After Method
+Before Method
+Flight Booking
+After Method
+After Test
+After Suite--------------------------------------
+
+DEPENDENCY - PRIORITISE EXECUTION
+@Test(dependsOnMethods={"OpenningBrowser"})
+@Test(dependsOnMethods={"OpenningBrowser"},alwaysRun=true)
+@Test(priority=0)
+@Test(priority=1)........
+@Test(enabled=false)
+@Test(timeOut=5000)
+@Test(dataProvider="getData")
+
+--------@DataProvider------------------------------
+	public Object[][] getdata()
+	{
+		Object[][] data = new Object[3][2];
+
+		data[0][0]="nonRestrictedUser@asd.asda";
+		data[0][1]="32654";
+
+		data[1][0]="RestrictedUser@asd.asda";
+		data[1][1]="0001122";
+		
+		data[2][0]="333RestrictedUser@asd.asda";
+		data[2][1]="0001122";
+		
+		return data;
+	}
+----------------------------------------------------
+LOG4J2:
+public static Logger log = LogManager.getLogger(Base.class.getName());
+<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.9.1</version>
+		</dependency>
+----------------------------------------------------
+java path mac
+
+nano ~/.bash_profile
+export JAVA_HOME=$(/usr/libexec/java_home)
+export PATH=$JAVA_HOME/bin:$PATH
+
+ctrl+O —> ctrl x

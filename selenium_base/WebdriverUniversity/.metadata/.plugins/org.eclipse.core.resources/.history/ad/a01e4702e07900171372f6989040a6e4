@@ -1,0 +1,13 @@
+package pageObjects;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class Products extends BasePage {
+	/** 1. Your Personal Details **/
+	public @FindBy(xpath = "#container-special-offers") WebElement header_YourPersonalDetails;
+	public @FindBy(xpath = ".//*[@id='guest_personal_details']/span") WebElement subheader_PersonalDetails;
+
+	public @FindBy(css = "#account_email_field") WebElement textfield_EmailAddress;
+	public @FindBy(css = ".form-group.email_signup *> input") WebElement tickbox_ExclusiveOffers;
+}

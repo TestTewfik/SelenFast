@@ -1,0 +1,33 @@
+package stepDefinitions;
+
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import cucumber.api.Scenario;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+import utils.DriverFactory;
+
+public class MasterHooks extends DriverFactory {
+	
+	@Before
+	public void setup() throws Exception {
+		driver =  getDriver();
+	}
+	
+	@After
+	public void screenshotOnFailure(Scenario scenario) throws Throwable {
+		if (scenario.isFailed()) {
+			scenario.embed(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES), "image/png");
+		}
+	}
+	
+	@After
+	public void tearDown() {
+		if (driver != null) {
+			driver.manage().deleteAllCookies();
+			driver.close();
+			driver.quit();
+			driver = null;
+		}
+	}
+}

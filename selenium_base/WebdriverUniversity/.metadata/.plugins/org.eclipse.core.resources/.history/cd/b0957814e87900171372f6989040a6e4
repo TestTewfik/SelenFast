@@ -1,0 +1,26 @@
+package pageObjects;
+
+import java.io.IOException;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class ContactUs_Page extends BasePage{
+	public @FindBy(xpath = "//input[@name='first_name']") WebElement textfield_FirstName;
+	public @FindBy(xpath = "//input[@name='last_name']") WebElement textfield_LastName;
+	public @FindBy(xpath = "//input[@name='email']") WebElement textfield_EmailAddress;
+	public @FindBy(xpath = "//input[@name='message']") WebElement textfield_Message;
+	public @FindBy(xpath = "//input[@value='SUBMIT']") WebElement button_Submit;
+	
+	public ContactUs_Page() throws IOException {
+		super();
+		PageFactory.initElements(driver, this);
+	}
+	
+	public ContactUs_Page enterFirstName() throws IOException {
+		sendKeysToWebElement(element, textToSend);
+		return new ContactUs_Page();
+	}
+
+}

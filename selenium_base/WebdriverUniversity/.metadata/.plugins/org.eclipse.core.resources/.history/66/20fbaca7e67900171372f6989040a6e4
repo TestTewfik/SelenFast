@@ -1,0 +1,15 @@
+package pageObjects;
+
+import java.io.IOException;
+
+import org.openqa.selenium.support.PageFactory;
+
+public class ContactUs_Page extends BasePage{
+
+	public ContactUs_Page() throws IOException {
+		super();
+		PageFactory.initElements(driver, this);
+	}
+	
+
+}

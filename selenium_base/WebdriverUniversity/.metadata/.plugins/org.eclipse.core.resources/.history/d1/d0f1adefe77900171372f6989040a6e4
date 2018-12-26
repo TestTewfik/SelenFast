@@ -1,0 +1,29 @@
+package pageObjects;
+
+import java.io.IOException;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class ContactUs_Page extends BasePage{
+	//input[@name='first_name']
+	//input[@name='last_name']
+	//input[@name='email']
+	//input[@name='message']
+	//input[@value='SUBMIT']
+	public @FindBy(xpath = "//input[@name='first_name']") WebElement textfield_FirstName;
+	public @FindBy(xpath = ".//*[@id='container-product2']") WebElement button_NewLaptops;
+	public @FindBy(xpath = ".//*[@id='myModal']//b[contains(text(),'NEWCUSTOMER')]") WebElement voucherCode;
+
+	public ContactUs_Page() throws IOException {
+		super();
+		PageFactory.initElements(driver, this);
+	}
+	
+	public ContactUs_Page enterFirstName() throws IOException {
+		sendKeysToWebElement(element, textToSend);
+		return new ContactUs_Page();
+	}
+
+}

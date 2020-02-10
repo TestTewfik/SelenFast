@@ -157,3 +157,6 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 export PATH=$JAVA_HOME/bin:$PATH
 
 ctrl+O —> ctrl x
+
+-------------------------------------------
+https://springframework.guru/log4j-2-configuration-using-properties-file/
